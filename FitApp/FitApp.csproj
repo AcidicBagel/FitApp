@@ -6,9 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Domain\FitApp.Domain.csproj" />
     <ProjectReference Include="..\FitApp.ConsoleView\FitApp.ConsoleView.csproj" />
-    <ProjectReference Include="..\XtremeFitnessApp.Database\FitApp.Database.csproj" />
+    <ProjectReference Include="..\FitApp.Database\FitApp.Database.csproj" />
+    <ProjectReference Include="..\FitApp.Domain\FitApp.Domain.csproj" />
   </ItemGroup>
 
 </Project>
