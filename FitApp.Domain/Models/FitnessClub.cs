@@ -21,15 +21,7 @@ namespace FitApp.Domain.Models
 
         public MembershipStorage FindBy(Membership membership)
         {
-            foreach (var membershipStorage in MembershipStorage)
-            {
-                if (membershipStorage.Membership == membership)
-                {
-                    return membershipStorage;
-                }
-            }
-
-            return null;
+            return _membershipStorage.FirstOrDefault(storage => storage.Membership == membership);
         }
     }
 }

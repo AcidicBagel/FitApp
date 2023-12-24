@@ -1,4 +1,5 @@
 ﻿using FitApp.Domain.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,7 +12,7 @@ namespace FitApp.Domain.Models
 
         private readonly string _login;
         private readonly string _password;
-        private readonly List<MembershipStorage> _purchasedMemberships = new();
+        private List<MembershipStorage> _purchasedMemberships;
 
         public Account(AccountDTO accountDTO)
         {
@@ -19,12 +20,21 @@ namespace FitApp.Domain.Models
             Balance = accountDTO.Balance;
             _login = accountDTO.Login;
             _password = accountDTO.Password;
-            _purchasedMemberships = accountDTO.PurchasedMemberships?.ToList();
+            _purchasedMemberships = accountDTO.PurchasedMemberships?.ToList() ?? new List<MembershipStorage>();
         }
 
         public bool IsExists(string login, string password)
         {
             return login == _login && password == _password;
+        }
+
+        public void BuyMembership(List<MembershipStorage> purchasedMemberships, uint totalPrice)
+        {
+            if (Balance < totalPrice)
+                throw new Exception("Not enough money.");
+
+            Balance -= totalPrice;
+            _purchasedMemberships.AddRange(purchasedMemberships);
         }
     }
 }

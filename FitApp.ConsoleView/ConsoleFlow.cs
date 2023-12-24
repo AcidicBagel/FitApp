@@ -12,7 +12,7 @@ namespace FitApp.View
 
         private Account _authorizedAccount;
         private FitnessClub _selectedClub;
-
+        private Cart _cart;
         public ConsoleFlow(ClubNet clubNet) 
         { 
             _clubNet = clubNet; 
@@ -20,13 +20,15 @@ namespace FitApp.View
 
         public void Start()
         {
-            GetAuthorizedAccount();
-            GetChosenClub();
-            GetChosenMemberships();
+            AuthorizeAccount();
+            SelectClub();
+            _cart = new Cart(_authorizedAccount, _selectedClub);
+            SelectMemberships();
 
+            Pay();
         }
 
-        private void GetAuthorizedAccount()
+        private void AuthorizeAccount()
         {
             Account authorizedAccount = null;
             while (authorizedAccount is null)
@@ -38,7 +40,7 @@ namespace FitApp.View
             _authorizedAccount = authorizedAccount;
         }
 
-        private void GetChosenClub()
+        private void SelectClub()
         {
             FitnessClub selectedClub = null;
             while (selectedClub is null)
@@ -53,10 +55,8 @@ namespace FitApp.View
             _selectedClub = selectedClub;
         }
 
-        private void GetChosenMemberships()
+        private void SelectMemberships()
         {
-            Cart cart = new Cart(_authorizedAccount, _selectedClub);
-
             while (true)
             {
                 ConsoleUI.PrintHeader(_authorizedAccount.UserName, _authorizedAccount.Balance);
@@ -73,16 +73,29 @@ namespace FitApp.View
 
                 try
                 {
-                    cart.AddMembership(_selectedClub.MembershipStorage[membershipID].Membership);
+                    _cart.AddMembership(_selectedClub.MembershipStorage[membershipID].Membership);
                 }
                 catch (Exception ex)
                 {
                     ConsoleUI.PrintError(ex);
                 }
-
-                if (ConsoleUI.RequestQuit() == "q")
+                Console.WriteLine(_cart.TotalPrice);
+                if (ConsoleUI.RequestQuit().ToLower() == "y")
                     break;
             }
+        }
+
+        private void Pay()
+        {
+            ConsoleUI.PrintHeader(_authorizedAccount.UserName, _authorizedAccount.Balance);
+            string answer = ConsoleUI.PrintCart(_cart);
+
+            if(answer.ToLower() == "y") 
+            {
+                _cart.Pay();
+            }
+
+            ConsoleUI.PrintMessage("Bye!");
         }
 
         private static bool IsNumeric(string userInput) => Regex.IsMatch(userInput, @"^\d+$");

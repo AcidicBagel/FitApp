@@ -91,9 +91,26 @@ namespace FitApp.View
         public static string RequestQuit()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine($"{Environment.NewLine}Enter \"Q\" to pay");
+            Console.WriteLine($"{Environment.NewLine}Enter \"Y\" to go to cart");
             Console.ResetColor();
             return Console.ReadLine()?.ToLower() ?? string.Empty;
+        }
+
+        public static string PrintCart(Cart cart)
+        {
+            Console.WriteLine($"Cart {Environment.NewLine}");
+            for(int i = 0; i < cart.SelectedMemberships.Count; i++) 
+            {
+                Console.WriteLine(
+                    $"{i}. {cart.SelectedMemberships[i].Membership.Name} {cart.SelectedMemberships[i].Quantity} pcs.{Environment.NewLine}" +
+                    $"Price: ${cart.SelectedMemberships[i].Membership.Price}{Environment.NewLine}");
+            }
+
+            Console.WriteLine(
+                $"TOTAL PRICE: ${cart.TotalPrice}" +
+                $"{Environment.NewLine}Enter \"Y\" to pay");
+
+            return Console.ReadLine();
         }
     }
 }

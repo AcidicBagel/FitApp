@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace FitApp.Domain.Models
 {
@@ -18,14 +19,7 @@ namespace FitApp.Domain.Models
 
         public Account FindAccount(string login, string password)
         {
-            foreach (var account in _accounts)
-            {
-                if (account.IsExists(login, password))
-                {
-                    return account;
-                }
-            }
-            return null;
+            return _accounts.FirstOrDefault(account => account.IsExists(login, password));
         }
 
         public List<string> GetClubNames()
