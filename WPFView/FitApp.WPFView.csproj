@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Images\" />
+    <Folder Include="Fonts\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\FitApp.Domain.csproj" />
+    <ProjectReference Include="..\XtremeFitnessApp.Database\FitApp.Database.csproj" />
+    <ProjectReference Include="..\XtremeFitnessApp\FitApp.csproj" />
+  </ItemGroup>
+
+</Project>

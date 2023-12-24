@@ -1,0 +1,20 @@
+[
+  {
+    "UserName": "SamSulek",
+    "Login": "a",
+    "Password": "a",
+    "Balance": 1000
+  },
+  {
+    "UserName": "Ben",
+    "Login": "Alex",
+    "Password": "0000",
+    "Balance": 598026
+  },
+  {
+    "UserName": "Adam",
+    "Login": "Sam",
+    "Password": "12345",
+    "Balance": 54321
+  }
+]

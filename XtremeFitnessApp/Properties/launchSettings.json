@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "FitApp": {
+      "commandName": "Project",
+      "commandLineArgs": "Storage/DB_FitnessClubs.json Storage/DB_Accounts.json"
+    }
+  }
+}
