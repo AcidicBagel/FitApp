@@ -9,20 +9,20 @@ namespace FitApp.Domain.Repository
         public string Login { get; private set; }
         public string Password { get; private set; }
         public uint Balance { get; private set; }
-        public ImmutableList<MembershipStorage> PurchasedMemberships { get; private set; }
+        public ImmutableList<MembershipStorage> MembershipStorages { get; private set; }
 
         public AccountDTO(
             string username,
             string login, 
             string password, 
             uint balance,
-            ImmutableList<MembershipStorage> purchasedMemberships)
+            ImmutableList<MembershipStorage> membershipStorages)
         {
             UserName = username;
             Login = login;
             Password = password;
             Balance = balance;
-            PurchasedMemberships = purchasedMemberships;
+            MembershipStorages = membershipStorages;
         }
     }
 }
